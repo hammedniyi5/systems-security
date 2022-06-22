@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 const validatePassword = async (request, response)=>{
     const requestHashedPassword = md5(request.body.password);//get the password from the dbody and hash it
-    const redisHashedPassword= await redisClient.hmGet('password',request.body.userName);// read password from redis
+    const redisHashedPassword= await redisClient.hmGet('passwords',request.body.userName);// read password from redis
     const loginRequest = request.body;
     console.log("Request Body",JSON.stringify(request.body));
 
