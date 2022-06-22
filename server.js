@@ -7,14 +7,10 @@ const md5 = require('md5');
 const bodyParser = require('body-parser');
 const {createClient} = require('redis');
 const { fstat } = require('fs');
-const redisClient = createClient(
-{
-    socket:{
-        port:6379,
-        host:"127.0.0.1"
-    }
-}
-);//this creates a connection to the redis database
+
+
+const redisClient = createClient({ url: 'redis://default@10.128.0.2:6379', });
+//this creates a connection to the redis database
 
 
 
