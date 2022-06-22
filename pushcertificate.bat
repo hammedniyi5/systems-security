@@ -1,0 +1,1 @@
+scp server.cert server.key user@ola-nodejs.cit270.com:/tmp

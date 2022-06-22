@@ -1,1 +1,1 @@
-curl -d "@data.json" -X POST -H "Content-Type:application/json" https://ola.cit270.com/signup
+curl -d "@data.json" -X POST -H "Content-Type:application/json" https://ola-nodejs.cit270.com/login

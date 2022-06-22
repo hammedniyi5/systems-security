@@ -29,7 +29,7 @@ const validatePassword = async (request, response)=>{
         response.status(200);
         response.send("Welcome");
     } else{
-        request.status(401);
+        response.status(401);
         response.send("Unauthorized");
     }
 
