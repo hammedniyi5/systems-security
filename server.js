@@ -9,7 +9,7 @@ const {createClient} = require('redis');
 const { fstat } = require('fs');
 
 
-const redisClient = createClient({ url: 'redis://default@ola-redis.cit270.com:6379', });
+const redisClient = createClient({ url: 'redis://default@ola-redis.cit270.com:6379' });
 //this creates a connection to the redis database
 
 
@@ -57,6 +57,6 @@ https.createServer({
     cert: fs.readFileSync('server.cert'),
     passphrase: 'P@ssw0rd'
  }, app).listen(port, async() => {
-     await redisClient.connect();
      console.log('Listening.....')
+     await redisClient.connect();
  })
