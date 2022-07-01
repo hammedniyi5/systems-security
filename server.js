@@ -9,7 +9,7 @@ const {createClient} = require('redis');
 const { fstat } = require('fs');
 
 
-const redisClient = createClient({ url: 'redis://default@10.128.0.2:6379', });
+const redisClient = createClient({ url: 'redis://default@ola-redis.cit270.com:6379', });
 //this creates a connection to the redis database
 
 
