@@ -2,7 +2,7 @@
 # Version 
 apiVersion: apps/v1
 # This can be a statefulset, or a deployment, a deployment doesn't need a hard drive
-kind: Develoyment
+kind: Development
 metadata:
 # This is the name of my deployment
   name: ola-cit270
@@ -68,7 +68,7 @@ metadata:
 spec:
   selector:
     app: ola-cit270
-  type: LoadBlancer
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 3000
