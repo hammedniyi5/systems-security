@@ -11,53 +11,53 @@ spec:
   selector:
     matchLabels:
       app: ola-cit270
-    template:
-      metadata:
-        labels:
-          app: ola-cit270
-      spec:
-        containers:
-          - name: ola-cit270
-          # This is the Dockerhud url to my image
-            image: hammedola/cit270 
-          # This is the command to run once the container starts
-            command: ["npm"]
+  template:
+    metadata:
+      labels:
+        app: ola-cit270
+    spec:
+      containers:
+        - name: ola-cit270
+        # This is the Dockerhud url to my image
+          image: hammedola/cit270 
+        # This is the command to run once the container starts
+          command: ["npm"]
 
-            args: ["run","start"]
-            
-            ports:
-              - containerPort: 443
-            resources:
-              limits:
+          args: ["run","start"]
+          
+          ports:
+            - containerPort: 443
+          resources:
+            limits:
 
-                cpu: ".125"
+              cpu: ".125"
 
-                memory: "500Mi"
-              request:
+              memory: "500Mi"
+            requests:
 
-                cpu: ".1"
+              cpu: ".1"
 
-                memory: "250Mi"
-              livenessProbe:
-                httpGet:
+              memory: "250Mi"
+          livenessProbe:
+            httpGet:
 
-                  path: /
+              path: /
 
-                  port: 443
+              port: 443
 
-                  scheme: HTTPS
-                initialDelaySeconds: 3
-                periodSeconds: 3
-              readinessProbe:
-                httpGet:
+              scheme: HTTPS
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
 
-                  path: /
+              path: /
 
-                  port: 443
+              port: 443
 
-                  scheme: HTTPS
-                initialDelaySeconds: 3
-                periodSeconds: 3
+              scheme: HTTPS
+            initialDelaySeconds: 3
+            periodSeconds: 3
 
 
 ---
