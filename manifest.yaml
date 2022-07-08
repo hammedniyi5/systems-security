@@ -1,0 +1,74 @@
+# 2021 Ola
+# Version 
+apiVersion: apps/v1
+# This can be a statefulset, or a deployment, a deployment doesn't need a hard drive
+kind: Develoyment
+metadata:
+# This is the name of my deployment
+  name: ola-cit270
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ola-cit270
+    template:
+      metadata:
+        labels:
+          app: ola-cit270
+      spec:
+        containers:
+          - name: ola-cit270
+          # This is the Dockerhud url to my image
+            image: hammedola/cit270 
+          # This is the command to run once the container starts
+            command: ["npm"]
+
+            args: ["run","start"]
+            
+            ports:
+              - containerPort: 443
+            resources:
+              limits:
+
+                cpu: ".125"
+
+                memory: "500Mi"
+              request:
+
+                cpu: ".1"
+
+                memory: "250Mi"
+              livenessProbe:
+                httpGet:
+
+                  path: /
+
+                  port: 443
+
+                  scheme: HTTPS
+                initialDelaySeconds: 3
+                periodSeconds: 3
+              readinessProbe:
+                httpGet:
+
+                  path: /
+
+                  port: 443
+
+                  scheme: HTTPS
+                initialDelaySeconds: 3
+                periodSeconds: 3
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ola-cit270-loadbalancer
+spec:
+  selector:
+    app: ola-cit270
+  type: LoadBlancer
+  ports:
+  - port: 80
+    targetPort: 3000
