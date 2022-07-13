@@ -1,7 +1,7 @@
 const express = require('express');//import the library
 const https = require('https');
 const fs = require('fs');
-const port = 443;
+const port = 3000;
 const app = express();//use the library
 const md5 = require('md5');
 const bodyParser = require('body-parser');
@@ -9,13 +9,17 @@ const {createClient} = require('redis');
 const { fstat } = require('fs');
 
 
-const redisClient = createClient({ url: 'redis://default@ola-redis.cit270.com:6379' });
+const redisClient = createClient({ url: 'redis://ola-redis.cit270.com:6379' });
 //this creates a connection to the redis database
 
 
 
 app.use(bodyParser.json());
 
+app.listen(port, async()=>{
+    await redisClient.connect();
+    console.log('Listening pn port: ',port);
+});
 
 
 const validatePassword = async (request, response)=>{
@@ -52,11 +56,13 @@ app.post('/login',validatePassword);
 
 app.post('/signup', savePassword);
 
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert'),
-    passphrase: 'P@ssw0rd'
- }, app).listen(port, async() => {
-     console.log('Listening.....')
-     await redisClient.connect();
- })
+
+// https.createServer({
+//     key: fs.readFileSync('server.key'),
+//     cert: fs.readFileSync('server.cert'),
+//     passphrase: 'P@ssw0rd'
+//  }, app).listen(port, async() => {
+//      console.log('Listening.....')
+//      await redisClient.connect();
+//  })
+
